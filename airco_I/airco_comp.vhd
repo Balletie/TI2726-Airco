@@ -57,17 +57,17 @@ ARCHITECTURE structural OF eight_bitadder IS
 		PORT(a, b, ci: in  std_logic;
 			 sum, co: out std_logic);
 	END COMPONENT;
-SIGNAL
+signal ct: std_logic_vector(7 downto 0);
 
 BEGIN
-	lbl1: fadder PORT MAP (A(0)=>a, B(0)=>b, sum=>C, co=>o); 
-	lbl2: fadder PORT MAP (A(1)=>a, B(1)=>b, sum=>C, co=>o);
-	lbl3: fadder PORT MAP (A(2)=>a, B(2)=>b, sum=>C, co=>o);
-	lbl4: fadder PORT MAP (A(3)=>a, B(3)=>b, sum=>C, co=>o);
-	lbl5: fadder PORT MAP (A(4)=>a, B(4)=>b, sum=>C, co=>o);
-	lbl6: fadder PORT MAP (A(5)=>a, B(5)=>b, sum=>C, co=>o);
-	lbl7: fadder PORT MAP (A(6)=>a, B(6)=>b, sum=>C, co=>o);
-	lbl8: fadder PORT MAP (A(7)=>a, B(7)=>b, sum=>C, co=>o);
+	lbl1: fadder PORT MAP (A(0)=>a, B(0)=>b, ct(0)=>cin, sum=>C(0), co=>ct(1)); 
+	lbl1: fadder PORT MAP (A(1)=>a, B(1)=>b, ct(1)=>cin, sum=>C(1), co=>ct(2)); 
+	lbl1: fadder PORT MAP (A(2)=>a, B(0)=>b, ct(0)=>cin, sum=>C(0), co=>ct(1)); 
+	lbl1: fadder PORT MAP (A(3)=>a, B(0)=>b, ct(0)=>cin, sum=>C(0), co=>ct(1)); 
+	lbl1: fadder PORT MAP (A(4)=>a, B(0)=>b, ct(0)=>cin, sum=>C(0), co=>ct(1)); 
+	lbl1: fadder PORT MAP (A(5)=>a, B(0)=>b, ct(0)=>cin, sum=>C(0), co=>ct(1)); ;
+	lbl1: fadder PORT MAP (A(6)=>a, B(0)=>b, ct(0)=>cin, sum=>C(0), co=>ct(1)); 
+	lbl1: fadder PORT MAP (A(7)=>a, B(7)=>b, ct(7)=>cin, sum=>C(7), co=>o); 
 END structural;
 
 -- A, B, C input operands (8-bit 2's complement!)
