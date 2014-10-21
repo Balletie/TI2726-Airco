@@ -44,12 +44,10 @@ use IEEE.std_logic_1164.ALL;
 
 
 ENTITY eight_bitadder IS
-   PORT (
-		A, B: in std_logic_vector(7 downto 0);
+   PORT (A, B: in std_logic_vector(7 downto 0);
 		f: in std_logic;
 		C: inout std_logic_vector(7 downto 0);
-		o, z: out std_logic
-		);
+		o, z: out std_logic);
 END eight_bitadder;
 
 ARCHITECTURE structural OF eight_bitadder IS
@@ -91,10 +89,8 @@ use IEEE.std_logic_1164.ALL;
 
 
 ENTITY add_comp IS
-   PORT (
-		A, B, C: in std_logic_vector(7 downto 0);
-		gz, o: out std_logic
-		);
+   PORT (A, B, C: in std_logic_vector(7 downto 0);
+	gz, o: out std_logic);
 END add_comp;
 
 ARCHITECTURE structural OF add_comp IS
@@ -114,24 +110,20 @@ ARCHITECTURE structural OF add_comp IS
 	END COMPONENT;
 
 	COMPONENT eight_bitadder
-		PORT (
-			A, B: in std_logic_vector(7 downto 0);
+		PORT (A, B: in std_logic_vector(7 downto 0);
 			f: in std_logic;
 			C: inout std_logic_vector(7 downto 0);
-			o, z: out std_logic
-		);
-	END COMPONENT
-
+			o, z: out std_logic);
+	END COMPONENT;
 	signal bplusc, D : std_logic_vector(7 downto 0);
 	signal v0, n0, v1, n1, y: std_logic;
-	
 BEGIN
 
-	lbl0: eight_bitadder PORT MAP (A=>B, B=>C, f='0', C=>bplusc, o=>v0, z=>n0);
-	lbl1: eight_bitadder PORT MAP (A=>A, B=>bplusc, f='1', C=>D, o=>v1, z=>n1);
-	lbl2: inver PORT MAP (a=>D(7), y=>y);
-	lbl3: and_2 PORT MAP (a=>y, b=>n1, y=>gz);
-	lbl4: or_2 PORT MAP (a=>v0, b=>v1, y=>o);
+	lbl0: eight_bitadder	PORT MAP (A=>B, B=>C, f=>'0', C=>bplusc, o=>v0, z=>n0);
+	lbl1: eight_bitadder	PORT MAP (A=>A, B=>bplusc, f=>'1', C=>D, o=>v1, z=>n1);
+	lbl2: inver		PORT MAP (a=>D(7), y=>y);
+	lbl3: and_2		PORT MAP (a=>y, b=>n1, y=>gz);
+	lbl4: or_2		PORT MAP (a=>v0, b=>v1, y=>o);
 
 END structural;
 

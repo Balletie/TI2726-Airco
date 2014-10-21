@@ -24,5 +24,4 @@ begin
 	  "01001100" after 300 ns,   -- 19 C
 	  "01011100" after 600 ns; -- 23 C
   lbl1: airco_comp port map (Tin=>Tin, Tref=>Tref, Td=>Td, c0=>c0, c1=>c1);
-
 end behaviour;
