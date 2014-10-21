@@ -143,11 +143,23 @@ end airco_comp;
 
 architecture structural of airco_comp is
 
-
+	COMPONENT or_2
+		PORT (a, b: in  std_logic;
+			y:    out std_logic);
+	END COMPONENT;
+	
+	COMPONENT add_comp
+	   PORT (A, B, C: in std_logic_vector(7 downto 0);
+		gz, o: out std_logic);
+	END COMPONENT;
+	
+	SIGNAL v0, v1, c0a: std_logic;
+-- C1 : Tin - (Tref + Td) > 0
 
 BEGIN
-
-
+	lbl0: add_comp PORT MAP (A=>Tin, B=>Tref, C=>Td, gz=>c1, o=>v0);
+	lbl1: add_comp PORT MAP (A=>Tref, B=>Tin, C=>Td, gz=>c0a, o=>v1);
+	lbl2: or_2 PORT MAP (a=>c1, b=>c0a, y=>c0);
 
 END structural;
 
