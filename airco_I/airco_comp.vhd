@@ -26,7 +26,7 @@ ARCHITECTURE structural OF Ex_fadder IS
 
 SIGNAL nb, s1: std_logic;
 BEGIN
-   lbl1: inver  	PORT MAP (a=>b, y=>nb);
+   lbl1: inver 	PORT MAP (a=>b, y=>nb);
    lbl2: mux21	PORT MAP (a=>b, b=>nb, sel=>sel, y=>s1);
    lbl3: fadder PORT MAP (a=>a, b=>s1, ci=>ci, sum=>sum, co=>co);
 END structural;
@@ -53,21 +53,21 @@ ENTITY eight_bitadder IS
 END eight_bitadder;
 
 ARCHITECTURE structural OF eight_bitadder IS
-	COMPONENT fadder
-		PORT(a, b, ci: in  std_logic;
-			 sum, co: out std_logic);
+	COMPONENT Ex_fadder
+		PORT (a, b, sel, ci: in  std_logic;
+			sum, co:  out std_logic);
 	END COMPONENT;
-signal ct: std_logic_vector(7 downto 0);
+signal ct: std_logic_vector(6 downto 0);
 
 BEGIN
-	lbl1: fadder PORT MAP (A(0)=>a, B(0)=>b, ct(0)=>cin, sum=>C(0), co=>ct(1)); 
-	lbl1: fadder PORT MAP (A(1)=>a, B(1)=>b, ct(1)=>cin, sum=>C(1), co=>ct(2)); 
-	lbl1: fadder PORT MAP (A(2)=>a, B(0)=>b, ct(0)=>cin, sum=>C(0), co=>ct(1)); 
-	lbl1: fadder PORT MAP (A(3)=>a, B(0)=>b, ct(0)=>cin, sum=>C(0), co=>ct(1)); 
-	lbl1: fadder PORT MAP (A(4)=>a, B(0)=>b, ct(0)=>cin, sum=>C(0), co=>ct(1)); 
-	lbl1: fadder PORT MAP (A(5)=>a, B(0)=>b, ct(0)=>cin, sum=>C(0), co=>ct(1)); ;
-	lbl1: fadder PORT MAP (A(6)=>a, B(0)=>b, ct(0)=>cin, sum=>C(0), co=>ct(1)); 
-	lbl1: fadder PORT MAP (A(7)=>a, B(7)=>b, ct(7)=>cin, sum=>C(7), co=>o); 
+	lbl0: Ex_fadder PORT MAP (a=>A(0), b=>B(0), sel=>f, ci=>f, sum=>C(0), co=>ct(0));
+	lbl1: Ex_fadder PORT MAP (a=>A(1), b=>B(1), sel=>f, ci=>ct(0), sum=>C(1), co=>ct(1));
+	lbl2: Ex_fadder PORT MAP (a=>A(2), b=>B(2), sel=>f, ci=>ct(1), sum=>C(2), co=>ct(2));
+	lbl3: Ex_fadder PORT MAP (a=>A(3), b=>B(3), sel=>f, ci=>ct(2), sum=>C(3), co=>ct(3));
+	lbl4: Ex_fadder PORT MAP (a=>A(4), b=>B(4), sel=>f, ci=>ct(3), sum=>C(4), co=>ct(4));
+	lbl5: Ex_fadder PORT MAP (a=>A(5), b=>B(5), sel=>f, ci=>ct(4), sum=>C(5), co=>ct(5));
+	lbl6: Ex_fadder PORT MAP (a=>A(6), b=>B(6), sel=>f, ci=>ct(5), sum=>C(6), co=>ct(6));
+	lbl7: Ex_fadder PORT MAP (a=>A(7), b=>B(7), sel=>f, ci=>ct(6), sum=>C(7), co=>o);
 END structural;
 
 -- A, B, C input operands (8-bit 2's complement!)

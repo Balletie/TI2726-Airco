@@ -26,6 +26,3 @@ begin
   lbl1: airco_comp port map (Tin=>Tin, Tref=>Tref, Td=>Td, c0=>c0, c1=>c1);
 
 end behaviour;
-
-
-
