@@ -17,47 +17,38 @@ entity airco_fsm is
 end airco_fsm;
 
 architecture behaviour of airco_fsm is
-	type airco_fsm_state is (OFF, HEAT, COOL, SERVICE);
+	type airco_fsm_state is (OFF_STATE, HEAT_STATE, COOL_STATE, SERVICE_STATE);
 	signal state, new_state: airco_fsm_state;
+	signal unit_ok: std_logic;
 begin
+	lb0: process(Z, E, W, G)
+	begin
+		unit_ok <= Z and E and W and G;
+	end process;
 	lb1: process(clk)
 	begin
 		if (clk'event and clk = '1') then
-			state <= new_state;
+			if (reset = '1') then
+				state <= OFF_STATE;
+			else
+				state <= new_state;
+			end if;
 		end if;
 	end process;
-	
-	
-	//define ZEWG as a single signal?
-	//reset should show in the FSM diagram?
-	lb2: process(state, Z, E, W, G, c0, c1, reset?)
+	lb2: process(unit_ok, c0, c1)
 	begin
-		case state is
-		when OFF = >
-			if() then
+		if(unit_ok = '1') then
+			if(c0 = '0') then
+				new_state <= OFF_STATE;
 			else
+				if(c1 = '0') then
+					new_state <= COOL_STATE;
+				else
+					new_state <= HEAT_STATE;
+				end if;
 			end if;
-			
-		when HEAT = >
-			if() then
-			else
-			end if;
-			
-		when COOL = >
-			if() then
-			else
-			end if;
-			
-		when SERVICE = >
-			if() then
-			else
-			end if;
-		
-			state <= new_state;
-		end case;
+		else
+			new_state <= SERVICE_STATE;
+		end if;
 	end process;
 end behaviour;
-
-
-
-
