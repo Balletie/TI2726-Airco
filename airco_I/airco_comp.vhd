@@ -53,14 +53,21 @@ ENTITY eight_bitadder IS
 END eight_bitadder;
 
 ARCHITECTURE structural OF eight_bitadder IS
-
+	COMPONENT fadder
+		PORT(a, b, ci: in  std_logic;
+			 sum, co: out std_logic);
+	END COMPONENT;
+SIGNAL
 
 BEGIN
--- ??
--- ??
--- ??
--- ??
-
+	lbl1: fadder PORT MAP (A(0)=>a, B(0)=>b, sum=>C, co=>o); 
+	lbl2: fadder PORT MAP (A(1)=>a, B(1)=>b, sum=>C, co=>o);
+	lbl3: fadder PORT MAP (A(2)=>a, B(2)=>b, sum=>C, co=>o);
+	lbl4: fadder PORT MAP (A(3)=>a, B(3)=>b, sum=>C, co=>o);
+	lbl5: fadder PORT MAP (A(4)=>a, B(4)=>b, sum=>C, co=>o);
+	lbl6: fadder PORT MAP (A(5)=>a, B(5)=>b, sum=>C, co=>o);
+	lbl7: fadder PORT MAP (A(6)=>a, B(6)=>b, sum=>C, co=>o);
+	lbl8: fadder PORT MAP (A(7)=>a, B(7)=>b, sum=>C, co=>o);
 END structural;
 
 -- A, B, C input operands (8-bit 2's complement!)
