@@ -57,8 +57,17 @@ ARCHITECTURE structural OF eight_bitadder IS
 		PORT (a, b, sel, ci: in  std_logic;
 			sum, co:  out std_logic);
 	END COMPONENT;
-signal ct: std_logic_vector(6 downto 0);
+	COMPONENT nor_2 IS
+	   PORT (a, b: in  std_logic;
+		 y:    out std_logic);
+	END COMPONENT;
+	COMPONENT or_4 IS
+	   PORT (a, b, c, d: IN  std_logic;
+		 y:       OUT std_logic);
+	END COMPONENT;
 
+	signal ct: std_logic_vector(6 downto 0);
+	signal z0,z1,nz: std_logic;
 BEGIN
 	lbl0: Ex_fadder PORT MAP (a=>A(0), b=>B(0), sel=>f, ci=>f, sum=>C(0), co=>ct(0));
 	lbl1: Ex_fadder PORT MAP (a=>A(1), b=>B(1), sel=>f, ci=>ct(0), sum=>C(1), co=>ct(1));
@@ -68,6 +77,9 @@ BEGIN
 	lbl5: Ex_fadder PORT MAP (a=>A(5), b=>B(5), sel=>f, ci=>ct(4), sum=>C(5), co=>ct(5));
 	lbl6: Ex_fadder PORT MAP (a=>A(6), b=>B(6), sel=>f, ci=>ct(5), sum=>C(6), co=>ct(6));
 	lbl7: Ex_fadder PORT MAP (a=>A(7), b=>B(7), sel=>f, ci=>ct(6), sum=>C(7), co=>o);
+	lbl8: or_4	PORT MAP (a=>C(0), b=>C(1), c=>C(2), d=>C(3), y=>z0);
+	lbl9: or_4	PORT MAP (a=>C(4), b=>C(5), c=>C(6), d=>C(7), y=>z1);
+	lbl10:nor_2	PORT MAP (a=>z0, b=>z1, y=>z);
 END structural;
 
 -- A, B, C input operands (8-bit 2's complement!)
