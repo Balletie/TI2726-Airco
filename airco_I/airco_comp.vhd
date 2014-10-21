@@ -153,13 +153,10 @@ architecture structural of airco_comp is
 		gz, o: out std_logic);
 	END COMPONENT;
 	
-	SIGNAL v0, v1, c0a: std_logic;
--- C1 : Tin - (Tref + Td) > 0
-
+	SIGNAL v0, v1, c0a, c0b: std_logic;
 BEGIN
-	lbl0: add_comp PORT MAP (A=>Tin, B=>Tref, C=>Td, gz=>c1, o=>v0);
+	lbl0: add_comp PORT MAP (A=>Tin, B=>Tref, C=>Td, gz=>c0b, o=>v0);
 	lbl1: add_comp PORT MAP (A=>Tref, B=>Tin, C=>Td, gz=>c0a, o=>v1);
-	lbl2: or_2 PORT MAP (a=>c1, b=>c0a, y=>c0);
-
+	lbl2: or_2 PORT MAP (a=>c0b, b=>c0a, y=>c0);
+	lbl3: c1 <= c0b;
 END structural;
-
