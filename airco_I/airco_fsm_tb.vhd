@@ -1,7 +1,8 @@
 library IEEE;
 use IEEE.std_logic_1164.ALL;
-use IEEE.std_logic_arith.ALL;
-use IEEE.std_logic_signed.ALL;
+--use IEEE.std_logic_arith.ALL;
+--use IEEE.std_logic_signed.ALL;
+use IEEE.numeric_std.ALL;
 
 library WORK;
 use WORK.ALL;
@@ -57,6 +58,3 @@ c1 <= '1' after 250 ns,
 z <= '0' after 540 ns;
 
 end behaviour;
-
-
-

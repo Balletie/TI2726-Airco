@@ -40,15 +40,31 @@ begin
 		if(unit_ok = '1') then
 			if(c0 = '0') then
 				new_state <= OFF_STATE;
+				cool	<= '0';
+				heat	<= '0';
+				off	<= '1';
+				service <= '0';
 			else
-				if(c1 = '0') then
+				if(c1 = '1') then
 					new_state <= COOL_STATE;
+					cool	<= '1';
+					heat	<= '0';
+					off	<= '0';
+					service <= '0';
 				else
 					new_state <= HEAT_STATE;
+					cool	<= '0';
+					heat	<= '1';
+					off	<= '0';
+					service <= '0';
 				end if;
 			end if;
 		else
 			new_state <= SERVICE_STATE;
+			cool	<= '0';
+			heat	<= '0';
+			off	<= '1';
+			service <= '1';
 		end if;
 	end process;
 end behaviour;
